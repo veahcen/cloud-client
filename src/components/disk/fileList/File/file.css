@@ -165,6 +165,14 @@
         grid-column-start: 7;
         display: block;
     }
+
+    .file-list-date {
+        grid-column-start: 3;
+    }
+
+    .file-list-size {
+        grid-column-start: 4;
+    }
 }
 
 @media (max-width: 576px) {

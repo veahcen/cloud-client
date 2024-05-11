@@ -137,7 +137,7 @@
         position: relative;
     }
     .navbar__container {
-        height: 300px;
+        height: auto;
         max-width: 300px;
         position: absolute;
         z-index: 1;

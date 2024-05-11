@@ -1,6 +1,6 @@
 import React from 'react';
 import './registration.css'
-import formRegistration from '../../assets/forma.docx'
+import formRegistration from '../../assets/forma.pdf'
 
 const Registration = () => {
     return (
