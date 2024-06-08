@@ -7,7 +7,7 @@ const Registration = () => {
         <div className='registration'>
             <h1 className='registration__title'>Регистрация</h1>
             <p className='registration__subtitle'>Для регистрации в корпоративном облаке заполните
-                данные в прекрипленном документе и отдайте распечатанную копию начальику</p>
+                данные в прекрипленном документе и отдайте распечатанную копию начальнику</p>
             <a href={formRegistration} className='registration__link' download>Форма</a>
         </div>
     );
