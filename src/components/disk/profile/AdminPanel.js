@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import './adminPanel.css'
 import {observer} from "mobx-react-lite";
-import {deleteUser, getUsers, registration} from "../../../http/user";
+import {deleteUser, getUsers, registration, accessUser} from "../../../http/user";
 import {Context} from "../../../index";
 import {GENERAL_USER_NAME} from "../../navbar/generalConst";
 
@@ -23,6 +23,7 @@ const AdminPanel = observer(() => {
     const [loadDel, setLoadDel] = useState(true)
     const [users, setUsers] = useState([])
     const [loadUsers, setLoadUsers] = useState(true)
+    const [accessingUser, setAccessingUser] = useState("")
 
     function registrationHandler(evt) {
         setLoad(false)
@@ -157,6 +158,34 @@ const AdminPanel = observer(() => {
             })
     }
 
+    useEffect(() => {
+        if (accessingUser !== '') {
+            access();
+        }
+    });
+
+    const handleClick = (e) => {
+        const email = e.target.textContent;
+        setAccessingUser(email);
+    };
+
+    async function  access() {
+        console.log(accessingUser)
+        try {
+            let checkUser;
+            checkUser = await accessUser(accessingUser)
+            user.setUser(checkUser)
+            user.setIsAuth(true)
+            user.setIsRole(checkUser.role)
+            user.setSpace(checkUser.usedSpace)
+            user.setAvatar(checkUser.avatar)
+        } catch (e) {
+            if (e.response?.data?.message) {
+                alert(e.response.data.message)
+            }
+        }
+    }
+
 
     return (
         <div className="admin-panel">
@@ -241,7 +270,7 @@ const AdminPanel = observer(() => {
                 >{loadUsers ? "Запросить пользователей" : "Запрос пользователей"}</button>
                 <div>
                     {users.map((user, index) => (
-                        <div key={index}>{user}</div>
+                        <div key={index} onClick={handleClick}>{user}</div>
                     ))}
                 </div>
             </div>
